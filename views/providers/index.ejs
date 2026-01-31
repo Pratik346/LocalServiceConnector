@@ -1,0 +1,78 @@
+<%layout("/layouts/boilerplate")%>
+<style>
+.provider-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.provider-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(25, 135, 84, 0.75);
+  border:3px solid #86efac
+}
+
+.provider-img {
+  height: 300px;
+  object-fit: cover;
+  background-color: green;
+}
+.provider-card .card-body {
+  text-align: center;
+}
+.provider-card .card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.provider-card .card-text {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+h2 {
+  font-weight: 700;
+}
+.services-title {
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #14532d;
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  border-radius: 30px;
+  box-shadow: 0 6px 14px rgba(34, 197, 94, 0.25);
+}
+</style>
+<div class="container my-5">
+  <div class="text-center my-5">
+    <h2 class="services-title">
+      <i class="fa-solid fa-people-group me-2"></i>
+      Our Service Providers
+    </h2>
+  </div>
+  
+  <div class="row g-4">
+    <% for (let provider of allproviders) { %>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card provider-card h-100">
+          <a href="/providers/<%=provider._id%>"><img 
+            src="<%= provider.image.url %>" 
+            class="card-img-top provider-img" 
+            alt="Provider image"
+          ></a>
+
+          <div class="card-body">
+            <h5 class="card-title"><%= provider.name %></h5>
+            <p class="card-text">
+              <strong>Work:</strong> <%= provider.typeofwork %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+

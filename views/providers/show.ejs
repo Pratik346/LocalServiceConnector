@@ -1,0 +1,199 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+.provider-hero {
+  background: linear-gradient(135deg, #14532d, #22c55e);
+}
+
+.provider-show-card {
+  border-radius: 18px;
+  overflow: hidden;
+}
+.provider-show-img {
+  height: 500px;
+  object-fit: cover;
+}
+.provider-name {
+  font-weight: 700;
+  color: #14532d;
+}
+.info-item {
+  background: #f0fdf4;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: #166534;
+}
+.highlight-box {
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.review-card {
+  border-radius: 14px;
+}
+</style>
+<div class="provider-hero py-5 mb-5">
+  <div class="container text-center text-white">
+    <h1 class="fw-bold"><%= provider.name %></h1>
+    <p class="fs-5">
+      <i class="fa-solid fa-briefcase me-2"></i>
+      <%= provider.typeofwork %> • <%= provider.location %>
+    </p>
+  </div>
+</div>
+<div class="container mb-5">
+  <div class="row g-4">
+    <div class="col-lg-4">
+
+      <div class="card provider-show-card shadow">
+        <img src="<%= provider.image.url %>" class="provider-show-img">
+
+        <div class="card-body">
+          <h4 class="provider-name text-center mb-3">
+            <i class="fa-solid fa-user me-2"></i>
+            <%= provider.name %>
+          </h4>
+
+          <div class="d-grid gap-2">
+            <div class="info-item"><strong>Work:</strong> <%= provider.typeofwork %></div>
+            <div class="info-item"><strong>Avg Price:</strong> ₹<%= provider.avgprice %></div>
+            <div class="info-item"><strong>Experience:</strong> <%= provider.experience %> years</div>
+            <div class="info-item"><strong>Location:</strong> <%= provider.location %></div>
+            <div class="info-item"><strong>Email:</strong> <%= provider.email %></div>
+            <div class="info-item"><strong>Contact:</strong> <%= provider.contactNumber %></div>
+          </div>
+        </div>
+      </div>
+
+      <% if (curruser && (curruser._id.equals(provider.creator._id) || curruser.role === "admin")) { %>
+      <div class="text-center mt-3">
+        <a href="/providers/<%= provider._id %>/edit" class="btn btn-outline-primary btn-sm me-2">
+          <i class="fa-solid fa-pen"></i> Edit
+        </a>
+        <form method="POST" action="/providers/<%= provider._id %>?_method=DELETE" class="d-inline">
+          <button class="btn btn-outline-danger btn-sm">
+            <i class="fa-solid fa-trash"></i> Delete
+          </button>
+        </form>
+      </div>
+      <% } %>
+
+    </div>
+    <div class="col-lg-8">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h4>
+            <i class="fa-solid fa-circle-info me-2 text-success"></i>
+            About Provider
+          </h4>
+          <p class="text-muted">
+            <%= provider.name %> is a trusted <strong><%= provider.typeofwork %></strong>
+            with over <strong><%= provider.experience %> years</strong> of experience,
+            serving customers in <strong><%= provider.location %></strong>.
+          </p>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <div class="highlight-box">
+            <i class="fa-solid fa-star text-success"></i>
+            <h5><%= provider.experience %>+</h5>
+            <p>Years Experience</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="highlight-box">
+            <i class="fa-solid fa-indian-rupee-sign text-success"></i>
+            <h5>₹<%= provider.avgprice %></h5>
+            <p>Average Cost</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="highlight-box">
+            <i class="fa-solid fa-location-dot text-success"></i>
+            <h5><%= provider.location %></h5>
+            <p>Service Area</p>
+          </div>
+        </div>
+      </div>
+      <% if (curruser) { %>
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="mb-3">
+            <i class="fa-solid fa-pen-to-square me-2"></i>
+            Write a Review
+          </h5>
+
+          <form action="/providers/<%= provider._id %>/reviews" method="POST">
+            <div class="mb-3">
+              <label class="form-label d-block">Rating</label>
+
+              <fieldset class="starability-slot">
+                <input type="radio" id="rate1" name="rating" value="1">
+                <label for="rate1">1 star</label>
+
+                <input type="radio" id="rate2" name="rating" value="2">
+                <label for="rate2">2 stars</label>
+
+                <input type="radio" id="rate3" name="rating" value="3">
+                <label for="rate3">3 stars</label>
+
+                <input type="radio" id="rate4" name="rating" value="4">
+                <label for="rate4">4 stars</label>
+
+                <input type="radio" id="rate5" name="rating" value="5">
+                <label for="rate5">5 stars</label>
+              </fieldset>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Comment</label>
+              <textarea name="comment" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <button class="btn btn-success">
+              <i class="fa-solid fa-paper-plane me-1"></i>
+              Submit Review
+            </button>
+          </form>
+        </div>
+      </div>
+      <% } else { %>
+        <div class="alert alert-warning">
+          Please <a href="/users/login">login</a> to add a review.
+        </div>
+      <% } %>
+      <hr>
+      <h4>
+        <i class="fa-solid fa-comments me-2"></i>
+        Customer Reviews
+      </h4>
+
+      <% if (provider.reviews.length === 0) { %>
+        <p class="text-muted">No reviews yet.</p>
+      <% } %>
+
+      <div class="row">
+        <% for (review of provider.reviews) { %>
+        <div class="col-md-6 mb-3">
+          <div class="card review-card shadow-sm">
+            <div class="card-body">
+              <h6 class="fw-bold"><%= review.author.username %></h6>
+              <p><%= review.comment %></p>
+              <p class="starability-result" data-rating="<%= review.rating %>"></p>
+
+              <% if (curruser && (curruser._id.equals(review.author._id) || curruser.role === "admin")) { %>
+              <form method="POST" action="/providers/<%= provider._id %>/reviews/<%= review._id %>?_method=DELETE">
+                <button class="btn btn-sm btn-outline-danger mt-2">Delete</button>
+              </form>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+</div>

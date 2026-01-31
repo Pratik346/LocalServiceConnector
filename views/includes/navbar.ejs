@@ -1,0 +1,165 @@
+<style>
+  .navbar {
+    padding: 12px 20px;
+    background-color: #dcfce7;
+  }
+  .navbar-brand {
+    font-weight: 700;
+    color: #14532d !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .search-form {
+    width: 380px;
+  }
+  
+  @media (max-width: 992px) {
+    .search-form {
+      width: 100%;
+      margin: 12px 0;
+    }
+  }
+  .nav-btn {
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+  }
+  .dropdown-menu {
+    border-radius: 12px;
+  }
+  </style>
+  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <i class="fa-solid fa-plug-circle-bolt"></i>
+        LocalServiceConnector
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarMain"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav align-items-center me-3">
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="fa-solid fa-house me-1"></i> Home
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              <i class="fa-solid fa-bars me-1"></i> Menu
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="/providers">
+                  <i class="fa-solid fa-people-group me-2"></i>
+                  Our Service Providers
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/services">
+                  <i class="fa-solid fa-briefcase me-2"></i>
+                  Our Services
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/about">
+                  <i class="fa-solid fa-circle-info me-2"></i>
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/contact">
+                  <i class="fa-solid fa-envelope me-2"></i>
+                  Contact Us
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <form
+          class="d-flex mx-auto search-form"
+          action="/providers/search"
+          method="GET"
+        >
+          <input
+            class="form-control me-2"
+            type="search"
+            name="q"
+            placeholder="Search by service or location"
+            required
+          >
+          <button class="btn btn-success nav-btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+        <ul class="navbar-nav align-items-center ms-auto">
+  
+          <% if (!curruser) { %>
+            <li class="nav-item me-2">
+              <a class="btn btn-outline-success nav-btn" href="/users/login">
+                <i class="fa-solid fa-right-to-bracket me-1"></i> Login
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-success nav-btn" href="/users/signup">
+                <i class="fa-solid fa-user-plus me-1"></i> Signup
+              </a>
+            </li>
+          <% } %>
+  
+          <% if (curruser) { %>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fa-solid fa-user-circle me-1"></i>
+                Dashboard
+              </a>
+  
+              <ul class="dropdown-menu dropdown-menu-end">
+                <%if(curruser.role==="provider"){%>
+                <li>
+                  <a class="dropdown-item" href="/providers/myproviders">
+                    <i class="fa-solid fa-id-badge me-2"></i>
+                    My Profile
+                  </a>
+                </li>
+              <%}%>
+                <% if (curruser.role === "admin") { %>
+                <li>
+                  <a class="dropdown-item" href="/admin/pendingproviders">
+                    <i class="fa-solid fa-user-check me-2"></i>
+                    Pending Providers
+                  </a>
+                </li>
+                <% } %>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <a class="dropdown-item text-danger" href="/users/logout">
+                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  

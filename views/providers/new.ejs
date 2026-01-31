@@ -1,0 +1,160 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+.provider-form-card {
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+.form-header {
+  background: linear-gradient(135deg, #14532d, #22c55e);
+  color: white;
+  padding: 28px;
+  text-align: center;
+}
+
+.form-header i {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.form-section {
+  padding: 30px;
+}
+
+.form-control,
+.form-select {
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.form-control:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 0.2rem rgba(34,197,94,0.25);
+}
+
+.submit-btn {
+  border-radius: 30px;
+  padding: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 576px) {
+  .form-section {
+    padding: 20px;
+  }
+}
+</style>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7 col-md-9 col-sm-12">
+      <div class="card provider-form-card">
+        <div class="form-header">
+          <i class="fa-solid fa-user-plus"></i>
+          <h3 class="fw-bold mt-2">Register as Service Provider</h3>
+          <p class="mb-0">Create your professional profile</p>
+        </div>
+        <div class="form-section">
+          <form
+            method="POST"
+            action="/providers"
+            class="needs-validation"
+            novalidate
+            enctype="multipart/form-data"
+          >
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Service Provider Name</label>
+              <input name="name" type="text" class="form-control" placeholder="Enter your name" required>
+              <div class="invalid-feedback">Please enter your name</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Description</label>
+              <textarea
+                name="description"
+                class="form-control"
+                rows="3"
+                placeholder="Brief description about your services"
+                required
+              ></textarea>
+              <div class="invalid-feedback">Please enter description</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Upload Profile Image</label>
+              <input name="image" type="file" class="form-control" accept="image/*" required>
+              <div class="form-text">PNG, JPG or JPEG only</div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Average Price (₹)</label>
+                <input name="avgprice" type="number" class="form-control" placeholder="Eg: 500" required>
+                <div class="invalid-feedback">Please enter price</div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Experience (Years)</label>
+                <input name="experience" type="number" min="1" class="form-control" placeholder="Eg: 3" required>
+                <div class="invalid-feedback">Please enter experience</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Type of Work</label>
+              <input
+                name="typeofwork"
+                type="text"
+                class="form-control"
+                placeholder="Electrician, Plumber, AC Technician..."
+                required
+              >
+              <div class="invalid-feedback">Please enter work type</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Location</label>
+              <input
+                name="location"
+                type="text"
+                class="form-control"
+                placeholder="House No, Town, District, State"
+                required
+              >
+              <div class="invalid-feedback">Please enter location</div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input name="email" type="email" class="form-control" placeholder="example@email.com" required>
+                <div class="invalid-feedback">Please enter valid email</div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Contact Number</label>
+                <input
+                  name="contactNumber"
+                  type="text"
+                  class="form-control"
+                  placeholder="10-digit mobile number"
+                  required
+                >
+                <div class="invalid-feedback">Please enter contact number</div>
+              </div>
+            </div>
+
+            <button class="btn btn-success w-100 submit-btn mt-3">
+              <i class="fa-solid fa-circle-check me-2"></i>
+              Create Profile
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

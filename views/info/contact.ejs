@@ -1,0 +1,79 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+.contact-title {
+  display: inline-block;
+  padding: 12px 32px;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #14532d;
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+}
+.contact-card {
+  border-radius: 16px;
+  border: none;
+}
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.05rem;
+  color: #374151;
+  margin-bottom: 16px;
+}
+.contact-list i {
+  font-size: 1.2rem;
+  color: #22c55e;
+}
+.contact-subtitle {
+  margin-top: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #166534;
+  background: #dcfce7;
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 20px;
+}
+
+</style>
+<div class="container my-5">
+  <div class="text-center mb-5">
+    <h2 class="contact-title">
+      Contact Us
+    </h2>
+    <br/>
+    <p class="text-muted mt-2 contact-subtitle">
+      We'd love to hear from you. Reach out anytime.
+    </p>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card contact-card shadow-sm">
+        <div class="card-body p-4">
+          <ul class="list-unstyled contact-list">
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <span>
+                <strong>Email:</strong> support@localservice.com
+              </span>
+            </li>
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <span>
+                <strong>Phone:</strong> +91 98765 43210
+              </span>
+            </li>
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span>
+                <strong>Location:</strong> Infocity Road, Patia, Bhubaneswar, Odisha, India
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

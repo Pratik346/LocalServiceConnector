@@ -1,0 +1,250 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+body {
+  overflow-x: hidden;
+}
+.hero-section {
+  background: radial-gradient(circle at top, #22c55e, #14532d);
+  color: white;
+  padding: 90px 0 100px;
+}
+
+.hero-card {
+  max-width: 720px;
+  margin: auto;
+}
+
+.hero-logo {
+  height: 120px;
+  background: white;
+  padding: 14px;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+}
+
+.hero-title {
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+  word-break: break-word;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-subtitle {
+  opacity: 0.95;
+}
+
+.hero-btn {
+  background: white;
+  color: #14532d;
+  border-radius: 30px;
+  padding: 14px 38px;
+  font-weight: 600;
+}
+.hero-btn:hover {
+  background: #dcfce7;
+  color: #14532d;
+}
+
+
+.feature-card {
+  border-radius: 20px;
+  background: #f0fdf4;
+  padding: 30px 20px;
+  transition: all 0.25s ease;
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 34px rgba(34,197,94,0.3);
+}
+
+.feature-icon {
+  width: 64px;
+  height: 64px;
+  margin: auto;
+  background: white;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.feature-icon i {
+  font-size: 1.8rem;
+  color: #22c55e;
+}
+
+
+.section-title {
+  color: #14532d;
+  font-weight: 800;
+}
+
+.service-card {
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+}
+
+.service-card img {
+  height: 190px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.service-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 16px;
+}
+
+.service-overlay h6 {
+  color: white;
+  font-weight: 700;
+}
+
+
+.cta-section {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+}
+
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 70px 0 80px;
+  }
+
+  .hero-logo {
+    height: 90px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 1.7rem;
+  }
+
+  .hero-subtitle,
+  .hero-section p {
+    font-size: 0.95rem;
+  }
+}
+</style>
+<section class="hero-section text-center">
+  <div class="container hero-card">
+
+    <img src="/images/LSClogo.png" class="hero-logo mb-4">
+
+    <h1 class="hero-title mb-3">
+      <span>Local</span>
+      <span>Service</span>
+      <span>Connector</span>
+    </h1>
+
+    <p class="hero-subtitle fs-5">
+      Connecting You to Trusted Local Experts
+    </p>
+
+    <p class="lead mt-2 mb-4">
+      Electricians • Plumbers • Technicians • Cleaners • More
+    </p>
+
+    <a href="/providers" class="btn hero-btn btn-lg">
+      <i class="fa-solid fa-magnifying-glass me-2"></i>
+      Explore Services
+    </a>
+
+  </div>
+</section>
+<section class="container py-5">
+  <div class="row g-4 text-center">
+
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon mb-3">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+        <h5 class="fw-bold">Verified Providers</h5>
+        <p class="text-muted">
+          Only approved and trusted professionals.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon mb-3">
+          <i class="fa-solid fa-indian-rupee-sign"></i>
+        </div>
+        <h5 class="fw-bold">Transparent Pricing</h5>
+        <p class="text-muted">
+          Know average costs before contacting.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon mb-3">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <h5 class="fw-bold">Fast & Simple</h5>
+        <p class="text-muted">
+          Find local services in seconds.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="container py-5">
+  <h3 class="text-center mb-4 section-title">
+    Popular Services Near You
+  </h3>
+
+  <div class="row g-4">
+
+    <% const services = [
+      {name:"Electrician", img:"https://images.unsplash.com/photo-1597502310092-31cdaa35b46d"},
+      {name:"Plumber", img:"https://plus.unsplash.com/premium_photo-1664301972519-506636f0245d"},
+      {name:"AC Technician", img:"https://plus.unsplash.com/premium_photo-1683134512538-7b390d0adc9e"},
+      {name:"Home Cleaning", img:"https://plus.unsplash.com/premium_photo-1679920025550-75324e59680f"}
+    ]; %>
+
+    <% services.forEach(s => { %>
+      <div class="col-md-3 col-sm-6">
+        <div class="card service-card shadow-sm">
+          <img src="<%= s.img %>">
+          <div class="service-overlay">
+            <h6><%= s.name %></h6>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+
+  </div>
+</section>
+<section class="cta-section py-5">
+  <div class="container text-center">
+    <h3 class="fw-bold mb-3">Are You a Service Provider?</h3>
+    <p class="mb-4 text-muted">
+      Grow your business by reaching customers nearby.
+    </p>
+    <a href="/providers/new" class="btn btn-success btn-lg">
+      <i class="fa-solid fa-user-plus me-2"></i>
+      Register as a Provider
+    </a>
+  </div>
+</section>

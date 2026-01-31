@@ -1,0 +1,104 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .show-img {
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .info-item i {
+    width: 20px;
+    color: #0d6efd;
+  }
+</style>
+
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Pending Service Provider Requests</h2>
+
+  <% if (providers.length === 0) { %>
+    <div class="alert alert-success text-center">
+      No pending requests
+    </div>
+  <% } else { %>
+
+    <div class="row justify-content-center g-4">
+      <% providers.forEach(provider => { %>
+
+        <div class="col-12 col-sm-10 col-md-6 col-lg-4">
+          <div class="card shadow-sm h-100">
+
+            <img 
+              src="<%= provider.image.url %>" 
+              class="card-img-top show-img" 
+              alt="Provider Image"
+            >
+
+            <div class="card-body">
+              <h5 class="card-title text-center mb-3">
+                <i class="fa-solid fa-user"></i>
+                <%= provider.name %>
+              </h5>
+
+              <p class="card-text info-item">
+                <i class="fa-solid fa-briefcase"></i>
+                <strong>Work:</strong> <%= provider.typeofwork %>
+              </p>
+
+              <p class="card-text info-item">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+                <strong>Avg Price:</strong>
+                ₹<%= provider.avgprice.toLocaleString("en-IN") %>
+              </p>
+
+              <p class="card-text info-item">
+                <i class="fa-solid fa-calendar-check"></i>
+                <strong>Experience:</strong> <%= provider.experience %> years
+              </p>
+
+              <p class="card-text info-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <strong>Location:</strong> <%= provider.location %>
+              </p>
+
+              <p class="card-text info-item">
+                <i class="fa-solid fa-envelope"></i>
+                <strong>Email:</strong> <%= provider.email %>
+              </p>
+
+              <p class="card-text info-item">
+                <i class="fa-solid fa-phone"></i>
+                <strong>Contact:</strong> <%= provider.contactNumber %>
+              </p>
+            </div>
+
+            <div class="card-footer text-center bg-white border-0">
+              <form 
+                method="POST" 
+                action="/admin/providers/<%= provider._id %>/approve" 
+                class="d-inline"
+              >
+                <button class="btn btn-outline-success btn-sm">
+                  <i class="fa-solid fa-check"></i> Accept
+                </button>
+              </form>
+
+              <form 
+                method="POST" 
+                action="/admin/providers/<%= provider._id %>/reject" 
+                class="d-inline ms-2"
+              >
+                <button class="btn btn-outline-danger btn-sm">
+                  <i class="fa-solid fa-xmark"></i> Reject
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+      <% }) %>
+    </div>
+
+  <% } %>
+</div>
+

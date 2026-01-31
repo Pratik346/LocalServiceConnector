@@ -1,0 +1,43 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+  <h3 class="text-center mb-4">
+    Search results for "<%= q %>"
+  </h3>
+
+  <% if (providers.length === 0) { %>
+    <div class="alert alert-warning text-center">
+      No approved service providers found.
+    </div>
+  <% } else { %>
+
+    <div class="row g-4">
+      <% providers.forEach(provider => { %>
+
+        <div class="col-md-4">
+          <div class="card shadow-sm h-100">
+
+            <img src="<%= provider.image.url %>" class="card-img-top">
+
+            <div class="card-body">
+              <h5 class="card-title"><%= provider.name %></h5>
+
+              <p><strong>Service:</strong> <%= provider.typeofwork %></p>
+              <p><strong>Location:</strong> <%= provider.location %></p>
+              <p><strong>Price:</strong> ₹<%= provider.avgprice %></p>
+
+              <a 
+                href="/providers/<%= provider._id %>" 
+                class="btn btn-sm btn-primary"
+              >
+                View Details
+              </a>
+            </div>
+
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+  <% } %>
+</div>

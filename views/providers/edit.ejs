@@ -1,0 +1,149 @@
+<% layout("/layouts/boilerplate") -%>
+
+<style>
+  .edit-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .edit-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 30px;
+  }
+
+  .edit-title {
+    font-weight: 700;
+    color: #14532d;
+    text-align: center;
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .preview-img {
+    width: 100%;
+    max-height: 800px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #dcfce7;
+  }
+
+  .btn-update {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border: none;
+    color: #fff;
+  }
+
+  .btn-update:hover {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+  }
+
+  @media (max-width: 576px) {
+    .edit-card {
+      padding: 20px;
+    }
+  }
+</style>
+
+<div class="container edit-wrapper my-5">
+  <div class="col-lg-8 col-md-10 col-12">
+    <div class="edit-card">
+
+      <h2 class="edit-title mb-4">
+        <i class="fa-solid fa-pen-to-square me-2"></i>
+        Edit Service Provider
+      </h2>
+
+      <form 
+        method="post"
+        action="/providers/<%= provider._id %>?_method=PUT"
+        class="needs-validation"
+        novalidate
+        enctype="multipart/form-data"
+      >
+
+        <!-- Name -->
+        <div class="mb-3">
+          <label class="form-label">Service Provider Name</label>
+          <input name="name" type="text" class="form-control" value="<%= provider.name %>" required>
+          <div class="invalid-feedback">Please enter name</div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea name="description" class="form-control" rows="3" required><%= provider.description %></textarea>
+          <div class="invalid-feedback">Please enter description</div>
+        </div>
+
+        <!-- Image Preview -->
+        <div class="mb-3">
+          <label class="form-label">Current Image</label>
+          <img src="<%= provider.image.url %>" class="preview-img mt-2" alt="Provider Image">
+        </div>
+
+        <!-- Upload Image -->
+        <div class="mb-3">
+          <label class="form-label">Upload New Image</label>
+          <input name="image" type="file" class="form-control">
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+          <label class="form-label">Average Price</label>
+          <input name="avgprice" type="number" class="form-control" value="<%= provider.avgprice %>" required>
+        </div>
+
+        <!-- Work Type -->
+        <div class="mb-3">
+          <label class="form-label">Type of Work</label>
+          <input name="typeofwork" type="text" class="form-control" value="<%= provider.typeofwork %>" required>
+        </div>
+
+        <!-- Experience -->
+        <div class="mb-3">
+          <label class="form-label">Experience (Years)</label>
+          <input name="experience" type="number" min="1" class="form-control" value="<%= provider.experience %>" required>
+        </div>
+
+        <!-- Location -->
+        <div class="mb-3">
+          <label class="form-label">Location</label>
+          <input name="location" type="text" class="form-control" value="<%= provider.location %>" required>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input name="email" type="email" class="form-control" value="<%= provider.email %>" required>
+        </div>
+
+        <!-- Contact -->
+        <div class="mb-4">
+          <label class="form-label">Contact Number</label>
+          <input name="contactNumber" type="text" class="form-control" value="<%= provider.contactNumber %>" required>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-update px-4">
+            <i class="fa-solid fa-check me-1"></i> Update
+          </button>
+
+          <a href="/providers/<%= provider._id %>" class="btn btn-outline-secondary px-4">
+            Cancel
+          </a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/js/script.js"></script>
