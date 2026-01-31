@@ -11,7 +11,7 @@ const reviewrouter=require("./routes/review.js");
 const userrouter=require("./routes/user.js");
 const adminrouter=require("./routes/admin.js");
 const session=require("express-session");
-const mongostore=require("connect-mongo");
+const MongoStore=require("connect-mongo");
 const flash=require("connect-flash");
 const passport=require("passport");
 const localStrategy=require("passport-local");
@@ -31,7 +31,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(methodoverride("_method"));
 app.engine("ejs",ejsmate);
 app.use(express.static(path.join(__dirname,"/public")));
-const store=mongostore.create({
+const store=MongoStore.create({
     mongoUrl:Mongo_Url,
     crypto:{
         secret:process.env.SECRET,
